@@ -24,4 +24,7 @@ def get_class(positives, negatives, to_classify):
     to_classify should be a word
     """
     x, y = convert_from_positives_and_negatives(positives, negatives)
-    return classify(x, y, to_classify)
+    syn0, l1, syn1, l2 = run_net(x, y)
+    res = [nonlin(np.dot(nonlin(np.dot(word, syn0)), syn1)) for word in to_classify]
+
+    return res
