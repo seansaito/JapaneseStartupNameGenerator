@@ -21,7 +21,7 @@ def convert_from_positives_and_negatives(positives, negatives):
 
 def get_class(positives, negatives, to_classify):
     """
-    to_classify should be a word
+    to_classify should be an array of words
     """
     x, y = convert_from_positives_and_negatives(positives, negatives)
     syn0, l1, syn1, l2 = run_net(x, y)
