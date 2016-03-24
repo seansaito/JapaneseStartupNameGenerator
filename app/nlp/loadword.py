@@ -1,6 +1,12 @@
+from global_vars import script_dir
+import os
+
+good_words = os.path.join(script_dir, "words.txt")
+bad_words = os.path.join(script_dir, "badwords.txt")
+
 def getGoodWords ():
 
-	wordfile = open ("words.txt", "r")
+	wordfile = open (good_words, "r")
 	wordList = []
 	for word in wordfile:
 		word = word.strip("\n")
@@ -9,11 +15,11 @@ def getGoodWords ():
 
 def getBadWords ():
 
-	wordfile = open ("badwords.txt", "r")
+	wordfile = open (bad_words, "r")
 	wordList = []
 	for word in wordfile:
 		word = word.strip("\n")
 		wordList.append (word)
 	return wordList
 
-print getBadWords()
+# print getBadWords()

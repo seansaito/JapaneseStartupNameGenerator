@@ -73,4 +73,4 @@ print syn1
 print l2
 print "============"
 new_input = np.array([[5, 5, 1, 2, 4, 2]])
-print nonlin(np.dot(nonlin(np.dot(new_input, syn0)), syn1))
+print nonlin(np.dot(nonlin(np.dot(new_input, syn0)), syn1))[0, 0]
