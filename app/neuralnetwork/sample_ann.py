@@ -11,8 +11,8 @@ def sigmoid(x, deriv=False):
     return 1/(1 + np.exp(-x))
 
 # input dataset
-x = np.array([  [0,0,1],
-                [0,1,1],
+x = np.array([  [0,0,0],
+                [0,1,0],
                 [1,0,1],
                 [1,1,1] ])
 
@@ -38,4 +38,9 @@ for i in xrange(10000):
     syn0 += np.dot(l0.T, l1_delta)
 
 print "Output after training"
+print syn0
 print l1
+
+print "Sample using l1"
+new_input = np.array([[0, 1, 0]])
+print sigmoid(np.dot(new_input, syn0))
