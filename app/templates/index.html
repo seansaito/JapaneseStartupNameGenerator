@@ -1,6 +1,33 @@
 <html>
 <head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="/static/css/material.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="/static/css/animate.css">
+  <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+  <h1>Japanese Startup Name Generator</h1>
+  <h3>Describe your startup or project in 150 characters or less</h3>
+  <form action="#">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" rows="3" maxLength="150" pattern="-?[a-zA-Z!.?, ]*(\.[a-zA-Z!.?, ]+)?" id="sample4">
+      <label class="mdl-textfield__label" for="sample4">Description...</label>
+      <span class="mdl-textfield__error">Invalid characters!</span>
+    </div>
+  </form>
+
+    <!-- Suggestions go here -->
+
+    <h3 class="animated fadeInLeft">Kodomo</h3>
+    <h3 class="animated fadeInRight">Genki</h3>
+    <h3 class="animated fadeInLeft">Jyagaimo</h3>
+    <h3 class="animated fadeInRight">Tonkachi</h3>
+
 </body>
 </html>

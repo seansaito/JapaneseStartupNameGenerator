@@ -6,16 +6,6 @@ def nonlin(x, deriv=False):
 
     return 1 / (1 + np.exp(-x))
 
-x = np.array([  [5, 3, 0, 0, 1],
-                [2, 2, 4, 5, 3],
-                [2, 1, 2, 4, 3],
-                [4, 3, 1, 1, 1]])
-
-y = np.array([  [0],
-                [1],
-                [1],
-                [0]])
-
 def run_net(x, y):
 
     np.random.seed(1)
@@ -59,6 +49,20 @@ def classify(x, y, i):
     print res
     return res
 
+  #############
+# Sample Script #
+  #############
+
+x = np.array([  [5, 3, 0, 0, 4, 1],
+                [2, 2, 4, 5, 2, 3],
+                [2, 1, 2, 4, 1, 3],
+                [4, 3, 1, 1, 5, 1]])
+
+y = np.array([  [0],
+                [1],
+                [1],
+                [0]])
+
 syn0, l1, syn1, l2 = run_net(x, y)
 
 print "End training"
@@ -68,5 +72,5 @@ print "============"
 print syn1
 print l2
 print "============"
-new_input = np.array([[1, 1, 3, 3, 3]])
+new_input = np.array([[5, 5, 1, 2, 4, 2]])
 print nonlin(np.dot(nonlin(np.dot(new_input, syn0)), syn1))

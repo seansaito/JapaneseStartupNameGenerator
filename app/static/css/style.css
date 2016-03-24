@@ -1,0 +1,92 @@
+.nav {
+    background-color: black;
+    color:white;
+    padding:12px;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-align: right;
+    margin-bottom: 75px;
+}
+
+.profile {
+    height:250px;
+    width: 250px;
+    border-radius: 250px;
+    margin: 0 auto;
+}
+
+.profile_picture_div {
+    height: 158px;
+    width:auto;
+    overflow: hidden;
+    display:inline-block;
+    margin-right: 10px;
+    margin-top:23px;
+    vertical-align: top
+}
+
+.new_user {
+    text-align: left;
+    left:25%;
+    height:auto;
+    width:50%;
+    position:absolute;
+}
+
+.right_fields {
+    width:auto;
+    height:20%;
+    display:inline-block;
+    vertical-align: top;
+}
+
+.bottom_fields {
+    width:85%;
+    height:20%;
+    display: inline-block;
+    vertical-align: top
+
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: relative;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    opacity:0.9;
+}
+
+body {
+    background:#f1f1f1;
+    text-align: center;
+}
+
+h1 {
+    margin:10px auto 0 auto;
+    text-align:center;
+    font-weight:200;
+    color:#4b4b4b;
+}
+
+#profInput {
+    align: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
