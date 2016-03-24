@@ -6,10 +6,10 @@ def nonlin(x, deriv=False):
 
     return 1 / (1 + np.exp(-x))
 
-x = np.array([  [0, 0, 1],
-                [0, 1, 1],
-                [1, 0, 1],
-                [1, 1, 1,]])
+x = np.array([  [5, 3, 0, 0, 1],
+                [2, 2, 4, 5, 3],
+                [2, 1, 2, 4, 3],
+                [4, 3, 1, 1, 1]])
 
 y = np.array([  [0],
                 [1],
@@ -19,7 +19,7 @@ y = np.array([  [0],
 np.random.seed(1)
 
 # randomly init weights with mean 0
-syn0 = 2 * np.random.random((3,4)) - 1
+syn0 = 2 * np.random.random((5,4)) - 1
 syn1 = 2 * np.random.random((4,1)) - 1
 
 for j in xrange(60000):
@@ -56,5 +56,5 @@ print "============"
 print syn1
 print l2
 print "============"
-new_input = np.array([[1, 0, 1]])
+new_input = np.array([[1, 1, 3, 3, 3]])
 print nonlin(np.dot(nonlin(np.dot(new_input, syn0)), syn1))
