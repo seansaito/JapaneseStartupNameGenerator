@@ -34,7 +34,9 @@ def get_class(to_classify):
     x, y = convert_from_positives_and_negatives(positives, negatives)
     print x
     print y
-    syn0, l1, syn1, l2 = run_net(x, y)
-    res = [nonlin(np.dot(nonlin(np.dot(convert_to_input(word), syn0)), syn1))[0, 0] for word in to_classify]
+    s0, l1, s1, l2 = run_net(x, y)
+    print s0
+    print s1
+    res = [nonlin(np.dot(nonlin(np.dot(convert_to_input(word), s0)), s1))[0, 0] for word in to_classify]
 
     return res
