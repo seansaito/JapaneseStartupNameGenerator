@@ -158,3 +158,33 @@ def classify(x, y, i):
     res = nonlin(np.dot(nonlin(np.dot(i, syn0)), syn1))
     print res
     return res
+
+def sample_run(num_pos, num_neg):
+    """
+    This function allows the user to test run the neural net.
+
+    Args:
+        num_pos (int)   : Number of words to sample from positive words
+        num_neg (int)   : Number of words to sample from negative words
+    """
+    pos_sample = random.sample(getGoodWords(), num_pos)
+    neg_sample = random.sample(getBadWords(), num_neg)
+
+    pos_res = get_class(pos_sample)
+    neg_res = get_class(neg_sample)
+
+    print "========================================="
+    print "===========Positive results=============="
+    print "========================================="
+
+    print pos_sample
+    print pos_res
+
+    print "========================================="
+    print "===========Negative results=============="
+    print "========================================="
+
+    print neg_sample
+    print neg_res
+
+    return
