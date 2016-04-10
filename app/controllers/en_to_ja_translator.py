@@ -28,6 +28,7 @@ class Translator(object):
     def get_translations_aux(self, word):
         """ For a single word/phrase """
         full_url = self.root_url.format(phrase=word)
+        print "Making request to %s" % full_url
         response = requests.get(full_url)
         soup = BeautifulSoup(response.text, "html.parser")
         return [a for a in soup.find_all("rt")]
@@ -39,7 +40,7 @@ class Translator(object):
             words (list)    : list of words
         Examples:
             Translator.get_translations(["dog", "pet", "hospitality", "cute"])
-        
+
         """
         pool = Pool(len(words))
         results = pool.map(self.get_translations_aux, words)

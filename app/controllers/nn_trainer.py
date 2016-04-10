@@ -2,7 +2,8 @@ from app.neuralnetwork.three_layer_ann import run_net, classify, nonlin
 from app.ling_prepro_hrishi.core import fingerprint_word
 from app.nlp.loadword import getBadWords, getGoodWords
 import numpy as np
-import random
+import json, json_tricks, random
+from global_vars import script_dir, weight_file
 
 def convert_fingerprint(words):
     return map(fingerprint_word, words)
@@ -29,6 +30,8 @@ def convert_from_positives_and_negatives(positives, negatives):
 def get_class(to_classify):
     """
     to_classify should be an array of words
+
+    This is the main function to call
     """
     # positives = random.sample(set(getGoodWords()), 20)
     # negatives = random.sample(set(getBadWords()), 20)
@@ -36,11 +39,13 @@ def get_class(to_classify):
     # s0, l1, s1, l2 = run_net(x, y)
     # print s0
     # print s1
+    print "[nn_trainer:get_class] Classying following words"
+    print to_classify
     p = getGoodWords()
     n = getBadWords()
     s0, l1, s1, l2 = recursive_net(p, n)
-    print s0
-    print s1
+    # print s0
+    # print s1
     res = [nonlin(np.dot(nonlin(np.dot(convert_to_input(word), s0)), s1))[0, 0] for word in to_classify]
 
     return res
@@ -51,18 +56,40 @@ def nonlin(x, deriv=False):
 
     return 1 / (1 + np.exp(-x))
 
+def load_weights():
+    """ Load cached weights from neuralnet_weight.json """
+    fp = open(weight_file, "r+")
+    try:
+        store = json_tricks.np.load(fp)
+    except:
+        store = json.load(fp)
+    fp.close()
+    return (store["syn0"], store["syn1"])
+
+def write_weights(syn0, syn1):
+    fp = open(weight_file, "w+")
+    store = {"syn0": syn0, "syn1": syn1}
+    fp.write(json_tricks.np.dumps(store))
+    fp.close()
+    return
+
 def recursive_net(p, n):
     np.random.seed(1)
     # randomly init weights with mean 0
-    syn0 = 2 * np.random.random((6,4)) - 1
-    syn1 = 2 * np.random.random((4,1)) - 1
+    print "[nn_trainer:recursive_net] Loading weights"
+    syn0, syn1 = load_weights()
 
-    for i in xrange(100):
-        positives = random.sample(set(p), 30)
-        negatives = random.sample(set(n), 30)
+    if syn0 == "" or syn1 == "":
+        print "[nn_trainer:recursive_net] Initializing weights with random numbers"
+        syn0 = 2 * np.random.random((6,4)) - 1
+        syn1 = 2 * np.random.random((4,1)) - 1
+
+    for i in xrange(1):
+        positives = random.sample(set(p), 20)
+        negatives = random.sample(set(n), 20)
         x, y = convert_from_positives_and_negatives(positives, negatives)
 
-        for j in xrange(10000):
+        for j in xrange(5000):
 
             # Feed fowrad through layers 0, 1, and 2
             l0 = x
@@ -72,7 +99,7 @@ def recursive_net(p, n):
             # calculate error
             l2_error = y - l2
 
-            if (j % 10000) == 0:
+            if (j % 1000) == 0:
                 print "Error: " + str(np.mean(np.abs(l2_error)))
 
             l2_delta = l2_error * nonlin(l2, deriv=True)
@@ -84,9 +111,10 @@ def recursive_net(p, n):
             syn1 += l1.T.dot(l2_delta)
             syn0 += l0.T.dot(l1_delta)
 
+    print "[nn_trainer:recursive_net] Writing to json file"
+    write_weights(syn0, syn1)
+
     return (syn0, l1, syn1, l2)
-
-
 
 def run_net(x, y):
 
